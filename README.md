@@ -1,12 +1,12 @@
 ## Sequence Labeling vs. Clause Classification for English Emotion Stimulus Detection
 
-This repository accompanies the paper ``Sequence Labeling vs. Clause Classification for English Emotion Stimulus Detection`` to be published in
+This repository accompanies the paper ``Token Sequence Labeling vs. Clause Classification for English Emotion Stimulus Detection`` to be published in
 _Proceedings of the 9th Joint Conference on Lexical and Computational Semantics_ (*SEM 2020)
 
 ##
 The code and the scripts to process the data will be made availble here.
 
-A preprint of the paper is availble here: 
+A preprint of the paper is availble here: https://arxiv.org/abs/2010.07557
 
 ## 
 ```
