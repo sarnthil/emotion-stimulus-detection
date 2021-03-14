@@ -1,23 +1,37 @@
-## Sequence Labeling vs. Clause Classification for English Emotion Stimulus Detection
+# Sequence Labeling vs. Clause Classification for English Emotion Stimulus Detection
+## Supplementary material: Code
 
-This repository accompanies the paper ``Token Sequence Labeling vs. Clause Classification for English Emotion Stimulus Detection`` to be published in
-_Proceedings of the 9th Joint Conference on Lexical and Computational Semantics_ (*SEM 2020)
+This folder contains the code associated with our paper.
 
-##
-The code and the scripts to process the data will be made availble here.
+- `sources`: Contains the original datasets.
+- `scripts`: Contains all of our programs to work with the data. We describe a
+  few of these scripts in detail:
+    - `extract.py`: Responsible for extracting the data from the original
+      datasets and aggregates them. Further helped by `extract_*.py` files that
+      handle the specific dataset.
+    - `clausify.py`: This implements the algorithm shown in pseudocode in the
+      paper: It splits text into clauses based on heuristics applied to a
+      constituency parse tree.
+    - `sl`/`icc`/`jcc`: Folders that contain similar structure and implement the
+      models using AllenNLP. Each of the folders contains a dataset reader, a
+      predictor, a templated model specification, and an alignment script for
+      the predictions.
+    - `eval`: Evaluation scripts can be found here.
 
-A preprint of the paper is availble here: https://arxiv.org/abs/2010.07557
+In order to generate the aggregated dataset (assuming all data in `sources` is complete), run:
 
-## 
-```
-@inproceedings{bostan-klinger2020,
-    title = "Sequence Labeling vs. Clause Classification for English Emotion Stimulus Detection",
-    author = "Oberländer, Laura  and Klinger, Roman",
-    booktitle = "Proceedings of the 9th Joint Conference on Lexical and Computational Semantics (*{SEM} 2020)",
-    month = december,
-    year = "2020",
-    address = "Barcelona, Spain",
-    publisher = "Association for Computational Linguistics",
-    url = "",
-  }
-  ```
+    make workdata/clausified.json
+
+This requires the dependencies specified in `requirements.txt`.
+
+Training a model can be done either via the Makefile:
+
+    make workdata/allennlp-models/sl
+
+, or directly through `allennlp train`, e.g.:
+
+    allennlp train workdata/sl/experiments/gne.json -s workdata/allennlp-models/sl/gne --include-package scripts.sl.reader --include-package scripts.sl.lstm_attention_tagger
+
+This requires the dependencies specified in `requirements.allennlp.txt`. Note
+that the Makefile currently only trains the SL models; this will be finalized
+upon acceptance such that the whole pipeline is fully reproducible.
