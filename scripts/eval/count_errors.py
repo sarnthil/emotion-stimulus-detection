@@ -50,6 +50,8 @@ def error_classes(gold, predicted):
                 else:
                     cases["VII"] += 1  # late start
                 continue
+            if set(pstr) == {"O"}:
+                cases["XII"] += 1  # false negative
             cases["XI"] += 1  # weird, probably multiple
     return cases
 
